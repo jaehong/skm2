@@ -19,6 +19,8 @@ public:
   void Go();
   void PutData();
 
+  void operator()() { Go(); };
+
 private:
   uint8_t  mDeviceId;
   uint8_t  mReadBuffer[1024];

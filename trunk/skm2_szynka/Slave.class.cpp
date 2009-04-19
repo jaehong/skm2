@@ -18,7 +18,7 @@ SLave::~Slave() { libser_close(fd); }
  */
 void Slave::Go()
 {
-	uint8_t* fr_buff[256];
+	uint8_t fr_buff[256];
 	bool id_num=0;
 
 	//tutaj odpalamy watek (PutData()) ktory czyta dane z szyny i wrzuca do bufora jesli
