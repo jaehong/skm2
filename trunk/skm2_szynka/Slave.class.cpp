@@ -7,9 +7,14 @@ using namespace SKM2;
 Slave::Slave(uint8_t id): mDeviceId(id), mTransmisionSet(false), mReadBuffBytesOccupied(0)
 {
 	fd = libser_open("/dev/ttyS1", B9600);
+	pthread_mutex_init(m_mtBufferMutex);
 }
 
-SLave::~Slave() { libser_close(fd); }
+SLave::~Slave()
+{
+	libser_close(fd);
+	pthread_mutex_destroy(m_mtBufferMutex);
+}
 
 
 

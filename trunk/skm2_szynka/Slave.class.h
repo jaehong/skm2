@@ -1,9 +1,12 @@
 #ifndef SLAVE_CLASS_H_INCLUDED
 #define SLAVE_CLASS_H_INCLUDED
 
+#include <pthread.h>
+
+#include "Reader.class.h"
 #include "Types.h"
 #include "crc.h"
-#include"Frame.h"
+#include "Frame.h"
 
 namespace SKM2
 {
@@ -27,6 +30,10 @@ private:
   uint32_t fd;			// uchwyt zwrocony przez libser_open
   bool mTransmisionSet; //czy transmisja nawizana
   uint16_t mReadBuffBytesOccupied; //ilosc bajtow danych zapisanych aktualnie w mReadBuffer
+
+  pthread_mutex_t m_mtBufferMutex;
+  Reader          m_clReader;
+
 
 };
 
