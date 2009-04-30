@@ -2,33 +2,33 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="bus.c" open="1" top="0" tabpos="1">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="294" topLine="139" />
 	</File>
-	<File name="bus.h" open="1" top="0" tabpos="6">
+	<File name="bus.h" open="0" top="0" tabpos="6">
 		<Cursor position="121" topLine="0" />
 	</File>
-	<File name="frame.h" open="1" top="0" tabpos="7">
+	<File name="frame.h" open="0" top="0" tabpos="7">
 		<Cursor position="50" topLine="0" />
 	</File>
-	<File name="glo.h" open="1" top="0" tabpos="8">
+	<File name="glo.h" open="0" top="0" tabpos="8">
 		<Cursor position="31" topLine="0" />
 	</File>
-	<File name="master.c" open="1" top="0" tabpos="4">
+	<File name="master.c" open="0" top="0" tabpos="4">
 		<Cursor position="210" topLine="81" />
 	</File>
 	<File name="reader.c" open="1" top="0" tabpos="3">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="338" topLine="88" />
 	</File>
-	<File name="reader.h" open="1" top="0" tabpos="9">
+	<File name="reader.h" open="0" top="0" tabpos="9">
 		<Cursor position="217" topLine="0" />
 	</File>
-	<File name="slave.c" open="1" top="0" tabpos="2">
-		<Cursor position="0" topLine="0" />
+	<File name="slave.c" open="1" top="1" tabpos="2">
+		<Cursor position="3038" topLine="184" />
 	</File>
-	<File name="writer.c" open="1" top="0" tabpos="5">
+	<File name="writer.c" open="0" top="0" tabpos="5">
 		<Cursor position="243" topLine="0" />
 	</File>
-	<File name="writer.h" open="1" top="1" tabpos="10">
+	<File name="writer.h" open="0" top="0" tabpos="10">
 		<Cursor position="209" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
