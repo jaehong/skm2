@@ -7,8 +7,10 @@
 #include "bus.h"
 #include "glo.h"
 #include <list>
-#include<map>
+#include <map>
 
+
+// @todo (pejotr#7#): Dodac kontrole powielonych ramek
 
 using namespace std;
 
@@ -43,10 +45,10 @@ void slave_sendfile(char*, char);
 void slave_message_loop()
 {
   map<char, bool> frame_numbers; //przechowuje numery kolejnych ramek w zaleznosci od wysylajcego
-  struct frame *recvframe; 
+  struct frame *recvframe;
 
 	//printf("%d", FRAME_SIZE);
-	
+
 
   printf("+=======+=========+==========+=======================+\n");
   printf("|  TYP  | ADRESAT | ODBIORCA |                       |\n");
@@ -55,14 +57,14 @@ void slave_message_loop()
 
   while(1)
   {
-  
+
     if(s_bAckWait && s_timeClockStart + SLAVE_TIMEOUT <= time(NULL) ) {
         printf("+                    TIMEOUT                         +\n");
         s_bAckWait = false;
     }
-  
+
     recvframe = bus_pickframe();
-    if(recvframe != NULL) 
+    if(recvframe != NULL)
     {
       switch(recvframe->f_chFlags & RESET_ID)
       {
@@ -70,19 +72,19 @@ void slave_message_loop()
         {
             //s_ackmap.insert(pair<char, bool>
             //s_ackmap[recvframe->f_chReceiverAddr] =! s_ackmap[recvframe->f_chReceiverAddr];
-                        
+
             s_bAckWait = false;
             if(recvframe->f_chReceiverAddr != s_chAddr)
             {
               bus_putframe( s_chAddr, MASTER_ADDR, FIN, "aaa");
             }
-            
-            
+
+
             if(recvframe->f_chSenderAddr != s_chAddr && recvframe->f_chReceiverAddr == s_chAddr)
             {
               s_list.pop_front();
             }
-            
+
         }
         break;
 
@@ -102,7 +104,7 @@ void slave_message_loop()
 		              printf("Nie udalo sie otworzyc pliku!\n");
               	}
               	fwrite(recvframe->f_chData, 1, strlen(recvframe->f_chData), file);
-              	fclose(file);             
+              	fclose(file);
               	bus_putframe(s_chAddr, recvframe->f_chSenderAddr, ACK, "...");
 							}
 							break;
@@ -116,12 +118,12 @@ void slave_message_loop()
           }
         }
         break;
-                    
+
         // zezwolenie na wysylanie
         case STR:
         {
 	        printf("|  STR  |   %3c   |   %3c    |                       |\n", recvframe->f_chSenderAddr, recvframe->f_chReceiverAddr);
-          if(recvframe->f_chReceiverAddr == s_chAddr) 
+          if(recvframe->f_chReceiverAddr == s_chAddr)
           {
             frame_numbers[recvframe->f_chSenderAddr]=false;
             if(!s_list.empty())
@@ -134,18 +136,18 @@ void slave_message_loop()
 						else
 						{
 							printf("|  FIN  |   %3c   |   %3c    | KONIEC TRANSMISJI :)  |\n", s_chAddr, MASTER_ADDR);
-            	bus_putframe( s_chAddr, MASTER_ADDR, FIN, "aaa");				
+            	bus_putframe( s_chAddr, MASTER_ADDR, FIN, "aaa");
 						}
           }
         }
         break;
       }
     }
-    else 
+    else
     {
       usleep(500);
     }
-    delete recvframe;	
+    delete recvframe;
   }
 }
 
@@ -170,14 +172,14 @@ void slave_sendfile(char* name)
 
   while(!feof(file))
   {
-    fread(toSend.f_chData, 1, FRAME_BUFFER_SIZE, file);    
+    fread(toSend.f_chData, 1, FRAME_BUFFER_SIZE, file);
     ///setFrameNumber(number, &flag);
-    number=!number; 
+    number=!number;
 		toSend.f_chFlags = number ? NUM1 : NUM0;
     toSend.f_chFlags |= DAT | RCK;
     s_list.push_back(toSend);
-        
-    for(int i = 0; i < FRAME_BUFFER_SIZE; ++i) 
+
+    for(int i = 0; i < FRAME_BUFFER_SIZE; ++i)
     {
       toSend.f_chData[i] = '\0';
     }
@@ -200,7 +202,7 @@ if(argc != 4 ) {
 	printf("Usage: ./slave my_addr\n");
 	exit(1);
 }
-	
+
 s_chAddr = *argv[1];
 s_chRecv = *argv[2];
 
