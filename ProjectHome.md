@@ -1,0 +1,1 @@
+Projekt na przedmiot SKM2, implementacja protokołu warstwy 2 - Token Bus na szynie RS485
